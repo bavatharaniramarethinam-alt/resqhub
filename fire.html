@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fire Service</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="container">
+<h2>🔥 Fire & Rescue Service</h2>
+
+<p style="max-width:600px; margin:auto; font-size:16px; line-height:1.6;">
+The Fire and Rescue Service responds to fire accidents, natural disasters, 
+and rescue operations. Firefighters risk their lives to save people and protect 
+property. They are trained to handle emergency situations with courage and dedication.
+</p>
+
+<h3 style="margin-top:15px; color:yellow;">
+தீயணைப்பு துறை மக்கள் பாதுகாப்பின் காவலன்  
+(Fire Service – Protector of the People)
+</h3>
+
+<br>
+
+<button onclick="makeCall('101')">📞 Call 101</button>
+
+<br><br>
+<button onclick="goBack()">Back</button>
+</div>
+
+<script>
+function makeCall(number){
+if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+window.location.href="tel:"+number;
+}else{
+alert("Call Fire Service: "+number);
+}
+}
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

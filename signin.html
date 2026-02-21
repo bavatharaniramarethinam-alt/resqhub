@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResQ Hub - Sign In</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0b0c42,#ff0000);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+.box{
+background:rgba(0,0,0,0.85);
+padding:30px;
+border-radius:20px;
+text-align:center;
+width:350px;
+color:white;
+}
+input,select{
+width:90%;
+padding:10px;
+margin:8px;
+border-radius:8px;
+border:none;
+}
+button{
+padding:12px 20px;
+border:none;
+border-radius:25px;
+background:red;
+color:white;
+cursor:pointer;
+margin-top:10px;
+}
+video,img{
+width:100%;
+margin-top:10px;
+border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>ResQ Hub Sign In</h2>
+
+<form id="form">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="tel" id="phone" placeholder="Phone Number" required>
+<input type="password" id="password" placeholder="Password" required>
+
+<select id="role" required>
+<option value="">Select Role</option>
+<option value="user">User</option>
+<option value="admin">Admin</option>
+</select>
+
+<video id="video" autoplay></video>
+<button type="button" onclick="capture()">Take Photo</button>
+<canvas id="canvas" width="300" height="200" style="display:none;"></canvas>
+<img id="preview">
+
+<button type="submit">Login</button>
+</form>
+</div>
+
+<script>
+const video=document.getElementById("video");
+
+navigator.mediaDevices.getUserMedia({video:true})
+.then(stream=>video.srcObject=stream);
+
+function capture(){
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+ctx.drawImage(video,0,0,300,200);
+document.getElementById("preview").src=canvas.toDataURL();
+}
+
+document.getElementById("form").addEventListener("submit",function(e){
+e.preventDefault();
+
+const user={
+name:name.value,
+email:email.value,
+phone:phone.value,
+password:password.value,
+role:role.value,
+photo:preview.src
+};
+
+localStorage.setItem("userData",JSON.stringify(user));
+window.location.href="index.html";
+});
+</script>
+
+</body>
+</html>

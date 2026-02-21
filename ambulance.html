@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ambulance</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="container">
+<h2>🚑 Ambulance Service</h2>
+
+<p style="max-width:600px; margin:auto; font-size:16px; line-height:1.6;">
+Ambulance services provide immediate medical assistance during emergencies. 
+They transport patients safely to hospitals and offer life-saving support on the way. 
+Ambulance teams work 24/7 to ensure quick response and emergency care.
+</p>
+
+<h3 style="margin-top:15px; color:yellow;">
+ஆம்புலன்ஸ் சேவை உயிர் காக்கும் நண்பன்  
+(Ambulance Service – Life Saving Friend)
+</h3>
+
+<br>
+
+<button onclick="makeCall('108')">📞 Call 108</button>
+
+<br><br>
+<button onclick="goBack()">Back</button>
+</div>
+
+<script>
+function makeCall(number){
+if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+window.location.href="tel:"+number;
+}else{
+alert("Call Ambulance: "+number);
+}
+}
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

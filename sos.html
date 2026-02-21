@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SOS Emergency - ResQ Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1 style="color:red;">🚨 SOS EMERGENCY</h1>
+
+    <p>
+        In case of emergency, press the button below.  
+        It will find nearby hospitals and dial emergency service.
+    </p>
+
+    <button class="sos-btn" onclick="activateSOS()">
+        🚨 ACTIVATE SOS
+    </button>
+
+    <br><br>
+
+    <h3>📞 Emergency Numbers (India)</h3>
+    <p>Ambulance: 108</p>
+    <p>Police: 100</p>
+    <p>Fire: 101</p>
+
+    <br>
+    <button onclick="goBack()">⬅ Back to Dashboard</button>
+
+</div>
+
+<script>
+
+function activateSOS() {
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+
+            alert("SOS Activated! Finding nearby hospitals...");
+
+            // Open nearby hospitals in Google Maps
+            window.open(
+                "https://www.google.com/maps/search/hospitals/@"
+                + lat + "," + lon + ",15z",
+                "_blank"
+            );
+
+            // Call 108 automatically on mobile
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location.href = "tel:108";
+            } else {
+                alert("Emergency Number: 108");
+            }
+
+        }, function() {
+            alert("Location permission denied. Please allow location access.");
+        });
+
+    } else {
+        alert("Geolocation is not supported in this browser.");
+    }
+}
+
+function goBack() {
+    window.location.href = "dashboard.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Panel - ResQ Hub</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>User Panel</h1>
+    <img src="uploads/default.png" class="profile" id="profilePic">
+    <h3 id="welcomeText">Welcome!</h3>
+
+    <div class="emergency-buttons">
+        <button onclick="alert('Calling Ambulance')">Call Ambulance</button>
+        <button onclick="alert('Calling Police')">Call Police</button>
+        <button onclick="alert('Calling Fire')">Call Fire</button>
+    </div>
+
+    <h3>Blood Donor / Receiver Registration</h3>
+    <form id="donorForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <select id="type" required>
+            <option value="">Select Type</option>
+            <option value="donor">Donor</option>
+            <option value="receiver">Receiver</option>
+        </select>
+        <input type="text" id="bloodGroup" placeholder="Blood Group (e.g., A+, O-)" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <h3>Available Donors</h3>
+    <ul id="donorList"></ul>
+</div>
+
+<script>
+// Load user
+const userData = JSON.parse(localStorage.getItem('loggedInUser'));
+document.getElementById('profilePic').src = userData.photo || 'uploads/default.png';
+document.getElementById('welcomeText').textContent = `Welcome, ${userData.name}`;
+
+const donorForm = document.getElementById('donorForm');
+const donorList = document.getElementById('donorList');
+
+function loadDonors(){
+    let donors = JSON.parse(localStorage.getItem('donors')) || [];
+    donorList.innerHTML='';
+    donors.filter(d=>d.type==='donor').forEach(d=>{
+        const li = document.createElement('li');
+        li.innerHTML = `${d.name} (${d.bloodGroup}) - ${d.phone} 
+            <button onclick="alert('Calling ${d.phone}')">Call</button>`;
+        donorList.appendChild(li);
+    });
+}
+
+donorForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const type = document.getElementById('type').value;
+    const bloodGroup = document.getElementById('bloodGroup').value;
+
+    let donors = JSON.parse(localStorage.getItem('donors')) || [];
+    donors.push({name,phone,type,bloodGroup});
+    localStorage.setItem('donors', JSON.stringify(donors));
+    donorForm.reset();
+    loadDonors();
+});
+
+loadDonors();
+</script>
+</body>
+</html>

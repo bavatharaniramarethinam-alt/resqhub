@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nearby Hospitals</title>
+<style>
+body{
+background:linear-gradient(#0b0c42,#ff0000);
+color:white;
+text-align:center;
+font-family:Arial;
+padding-top:60px;
+}
+button{
+padding:15px 25px;
+border:none;
+border-radius:25px;
+background:red;
+color:white;
+margin:20px;
+}
+</style>
+</head>
+<body>
+
+<h2>Find Nearby Hospitals</h2>
+
+<button onclick="findHospital()">Show Nearby Hospitals</button>
+<br>
+<button onclick="back()">Back</button>
+
+<script>
+function findHospital(){
+
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(function(position){
+
+let lat = position.coords.latitude;
+let lon = position.coords.longitude;
+
+let url="https://www.google.com/maps/search/hospitals/@"+
+lat+","+lon+",15z";
+
+window.open(url,"_blank");
+
+});
+}else{
+alert("Location not supported");
+}
+}
+
+function back(){
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

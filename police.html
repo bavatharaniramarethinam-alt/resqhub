@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Police</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="container">
+<h2>🚓 Police Service</h2>
+
+<p style="max-width:600px; margin:auto; font-size:16px; line-height:1.6;">
+The Police are the protectors of society. They maintain law and order, prevent crimes, 
+help citizens during emergencies, and ensure public safety. Police officers work 
+24/7 to safeguard people and provide support whenever needed.
+</p>
+
+<h3 style="margin-top:15px; color:yellow;">
+காவல்துறை உங்கள் நண்பன்  
+(Kavalthurai Ungal Nanban – The Police Are Your Friend)
+</h3>
+
+<br>
+
+<button onclick="makeCall('100')">📞 Call 100</button>
+
+<br><br>
+<button onclick="goBack()">Back</button>
+</div>
+
+<script>
+function makeCall(number){
+if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+window.location.href="tel:"+number;
+}else{
+alert("Call Police: "+number);
+}
+}
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

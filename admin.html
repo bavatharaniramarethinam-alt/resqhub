@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - ResQ Hub</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Admin Panel</h1>
+    <img src="uploads/default.png" class="profile" id="profilePic">
+    <h3 id="welcomeText">Welcome, Admin!</h3>
+
+    <h2>Manage Donors</h2>
+    <ul id="donorList"></ul>
+
+    <h2>Emergency Services</h2>
+    <button onclick="alert('Manage Ambulance Contacts')">Ambulance</button>
+    <button onclick="alert('Manage Police Contacts')">Police</button>
+    <button onclick="alert('Manage Fire Contacts')">Fire</button>
+</div>
+
+<script>
+// Load admin user
+const userData = JSON.parse(localStorage.getItem('loggedInUser'));
+document.getElementById('profilePic').src = userData.photo || 'uploads/default.png';
+document.getElementById('welcomeText').textContent = `Welcome, ${userData.name} (Admin)`;
+
+// Show all donors
+const donorList = document.getElementById('donorList');
+function loadDonors(){
+    let donors = JSON.parse(localStorage.getItem('donors')) || [];
+    donorList.innerHTML='';
+    donors.forEach(d=>{
+        const li = document.createElement('li');
+        li.innerHTML = `${d.name} (${d.bloodGroup}) - ${d.phone} [${d.type}]`;
+        donorList.appendChild(li);
+    });
+}
+
+loadDonors();
+</script>
+</body>
+</html>

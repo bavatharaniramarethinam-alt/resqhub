@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResQ Hub - Home</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.title{
+font-size:26px;
+font-weight:bold;
+margin-bottom:15px;
+color:#ff4d4d;
+}
+
+.about{
+margin:15px 0;
+font-size:14px;
+line-height:1.6;
+}
+
+.sos-btn{
+background:#ff0000;
+font-size:20px;
+padding:15px 30px;
+border-radius:50px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 10px red;}
+50%{box-shadow:0 0 30px red;}
+100%{box-shadow:0 0 10px red;}
+}
+
+.section-title{
+margin-top:20px;
+font-weight:bold;
+color:#ff6666;
+}
+
+.news-box, .ideas-box{
+background:rgba(255,255,255,0.1);
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+font-size:13px;
+text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img id="profile" class="profile">
+
+<div class="title">
+ResQ Hub - Community Based Emergency Locator
+</div>
+
+<div class="about">
+ResQ Hub connects you instantly with Ambulance, Police, Fire Services,
+Blood Donors, and Nearby Hospitals.  
+Fast. Reliable. Life-Saving.
+</div>
+
+<button class="sos-btn" onclick="sosCall()">🚨 SOS EMERGENCY</button>
+
+<br><br>
+
+<button onclick="startApp()">Enter Dashboard</button>
+
+<div class="section-title">📰 Tamil Nadu Breaking News</div>
+<div class="news-box">
+• Heavy rainfall warning issued in Chennai.<br>
+• Road safety awareness drive launched across Tamil Nadu.<br>
+• Emergency preparedness meeting conducted by officials.
+</div>
+
+<div class="section-title">💡 Safety Ideas</div>
+<div class="ideas-box">
+• During earthquakes – Stay under strong table.<br>
+• During floods – Move to higher ground immediately.<br>
+• Landslides – Avoid hill roads in heavy rain.<br>
+• Road accidents – Call ambulance immediately and stay calm.
+</div>
+
+</div>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("userData"));
+
+if(!user){
+window.location.href="signin.html";
+}
+
+document.getElementById("profile").src = user.photo;
+
+function startApp(){
+window.location.href="dashboard.html";
+}
+
+function sosCall(){
+window.location.href="tel:112"; // India emergency number
+}
+
+</script>
+
+</body>
+</html>

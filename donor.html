@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blood Donor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h2>🩸 Register as Blood Donor</h2>
+
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="text" id="blood" placeholder="Blood Group (A+, O-, etc)" required>
+<input type="tel" id="phone" placeholder="Phone Number" required>
+
+<button onclick="saveDonor()">Register</button>
+
+<br><br>
+<button onclick="goBack()">Back</button>
+</div>
+
+<script>
+function saveDonor(){
+
+const donor={
+name:document.getElementById("name").value,
+blood:document.getElementById("blood").value,
+phone:document.getElementById("phone").value
+};
+
+if(donor.name==="" || donor.blood==="" || donor.phone===""){
+alert("Fill all fields");
+return;
+}
+
+let donors=JSON.parse(localStorage.getItem("donors"))||[];
+donors.push(donor);
+localStorage.setItem("donors",JSON.stringify(donors));
+
+alert("Donor Registered Successfully!");
+document.getElementById("name").value="";
+document.getElementById("blood").value="";
+document.getElementById("phone").value="";
+}
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>

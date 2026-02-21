@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blood Receiver</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h2>🩸 Available Donors</h2>
+
+<div id="donorList"></div>
+
+<br>
+<button onclick="goBack()">Back</button>
+</div>
+
+<script>
+
+let donors=JSON.parse(localStorage.getItem("donors"))||[];
+let list=document.getElementById("donorList");
+
+if(donors.length===0){
+list.innerHTML="<p>No donors registered yet.</p>";
+}else{
+donors.forEach((d,index)=>{
+list.innerHTML+=`
+<div style="margin:10px;padding:10px;background:rgba(255,255,255,0.1);border-radius:10px;">
+Name: ${d.name}<br>
+Blood Group: ${d.blood}<br>
+Phone: ${d.phone}<br>
+<button onclick="makeCall('${d.phone}')">Call</button>
+</div>
+`;
+});
+}
+
+function makeCall(number){
+if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+window.location.href="tel:"+number;
+}else{
+alert("Call Donor: "+number);
+}
+}
+
+function goBack(){
+window.location.href="dashboard.html";
+}
+
+</script>
+
+</body>
+</html>
